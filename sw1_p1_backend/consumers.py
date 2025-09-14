@@ -20,7 +20,6 @@ class DiagramConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
         print("received data")
-        print(self.room_group_name)
         await self.channel_layer.group_send(
             self.room_group_name, {"type": "chat.message", "message": message}
         )
@@ -28,5 +27,4 @@ class DiagramConsumer(AsyncWebsocketConsumer):
     async def chat_message(self, event):
         update = event["message"]
         print(f"sent data")
-        # Send message to WebSocket
         await self.send(update)
