@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'channels'
+    'channels',
+    'daphne',
+    'sw1_p1_backend',
 ]
 
 ASGI_APPLICATION = 'sw1_p1_backend.asgi.application'
