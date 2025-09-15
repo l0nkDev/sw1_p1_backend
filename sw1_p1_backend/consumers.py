@@ -1,19 +1,18 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
+from channels.db import database_sync_to_async
 
 class DiagramConsumer(AsyncWebsocketConsumer):
-    def connect(self):
-        from .models import Session
+    async def connect(self):
         self.room_name = self.scope["url_route"]["kwargs"]["session_name"]
         self.room_group_name = f"diagram_{self.room_name}"
-        
-        self.channel_layer.group_add(
+
+        await self.channel_layer.group_add(
             self.room_group_name, self.channel_name
         )
-        self.accept()
-        s = Session.objects.get(id=self.room_name)
-        print(s)
-        Session.objects.get_or_create(id=self.room_name)
+        await self.accept()
+        session = await database_sync_to_async(self.get_session)(self.room_name)
+        print(session.diagram)
 
     async def disconnect(self, close_code):
         # Called when the WebSocket closes for any reason.
@@ -32,3 +31,8 @@ class DiagramConsumer(AsyncWebsocketConsumer):
         update = event["message"]
         print(f"sent data")
         await self.send(update)
+
+    def get_session(self, session_name):
+        from core.models import Session
+        session, created = Session.objects.get_or_create(id=session_name)
+        return session

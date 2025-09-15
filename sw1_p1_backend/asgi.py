@@ -8,8 +8,8 @@ https://docs.djangoproject.com/en/5.1/howto/deployment/asgi/
 """
 
 import os
-from  sw1_p1_backend import routing
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sw1_p1_backend.settings')
+from sw1_p1_backend import routing
 
 application = routing.application
