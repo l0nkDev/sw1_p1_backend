@@ -23,14 +23,11 @@ class DiagramConsumer(AsyncWebsocketConsumer):
         # Called with a message received from the WebSocket.
         text_data_json: str = json.loads(text_data)
         message = text_data_json['message']
-        print(json.dumps(json.loads(message)["nodes"], indent=2))
-        print("\n\n\n\n\nDATA ENDS HERE\n\n\n\n\n")
-        await database_sync_to_async(Session.objects.filter(id=self.room_name).update)(diagram=message)
+        await database_sync_to_async(Session.objects.filter(id=self.room_name).update)(diagram=message["diagram"])
         await self.channel_layer.group_send(
             self.room_group_name, {"type": "chat.message", "message": message}
         )
         
     async def chat_message(self, event):
         update = event["message"]
-        print(f"sent data")
-        await self.send(update)
+        await self.send(json.dumps(update))

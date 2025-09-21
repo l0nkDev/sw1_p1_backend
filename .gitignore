@@ -1,2 +1,4 @@
 /sw1_p1_backend/__pycache__
 /sw1_p1_backend/__pycache__
+*.sqlite3
+/core/__pycache__
