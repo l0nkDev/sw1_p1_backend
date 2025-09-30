@@ -39,17 +39,26 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'channels',
+    'channels_postgres',
 ]
 
 ASGI_APPLICATION = 'sw1_p1_backend.asgi.application'
 
 CHANNEL_LAYERS = {
         'default': {
-            'BACKEND': 'channels.layers.InMemoryChannelLayer', # For development
+            # 'BACKEND': 'channels.layers.InMemoryChannelLayer', # For development
             # 'BACKEND': 'channels_redis.core.RedisChannelLayer', # For production with Redis
             # 'CONFIG': {
-            #     'hosts': [('127.0.0.1', 6379)],
-            # },
+            #     'hosts': [('127.0.0.1', 6379)]
+            "BACKEND": "channels_postgres.core.PostgresChannelLayer",
+            "CONFIG": {
+                "ENGINE": "django.db.backends.postgresql_psycopg2", # Or your specific PostgreSQL engine
+                "NAME": "sw1p1db",
+                "USER": "postgres",
+                "PASSWORD": "\\^MGbat%=5deeuN",
+                "HOST": "34.55.58.2",
+                "PORT": "5432"
+            }
         }
 }
 
@@ -89,8 +98,14 @@ WSGI_APPLICATION = 'sw1_p1_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'sw1p1db',
+        'USER': 'postgres',
+        'PASSWORD': '\\^MGbat%=5deeuN',
+        'HOST': '34.55.58.2', # Or your database server's IP
+        'PORT': '5432',
     }
 }
 
