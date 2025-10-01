@@ -12,6 +12,8 @@ import django
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sw1_p1_backend.settings')
 django.setup()
-from sw1_p1_backend import routing
+# This import is intentionally placed here due to Django Channels' app loading
+# requirements, as it relies on the app registry being ready.
+from sw1_p1_backend import routing  # noqa: E402
 
 application = routing.application

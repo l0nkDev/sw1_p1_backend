@@ -20,7 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b_+3vwu0th7^h48vs@cqh99w52+ba7)zo$o3qeo0*w=h5&ege@'
+SECRET_KEY = (
+    'django-insecure-b_+3vwu0th7^h48vs@cqh99w52+ba7)zo$o3qeo0*w=h5&ege@'
+    )
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,12 +47,12 @@ INSTALLED_APPS = [
 ASGI_APPLICATION = 'sw1_p1_backend.asgi.application'
 
 CHANNEL_LAYERS = {
-        'default': {
-             'BACKEND': 'channels.layers.InMemoryChannelLayer', # For development
-            # 'BACKEND': 'channels_redis.core.RedisChannelLayer', # For production with Redis
-            # 'CONFIG': {
-            #     'hosts': [('127.0.0.1', 6379)]
-        }
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',  # For development
+        # 'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        # 'CONFIG': {
+        #     'hosts': [('127.0.0.1', 6379)]
+    }
 }
 
 MIDDLEWARE = [
@@ -89,13 +91,13 @@ WSGI_APPLICATION = 'sw1_p1_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sw1p1db',
         'USER': 'postgres',
         'PASSWORD': '\\^MGbat%=5deeuN',
-        'HOST': '34.55.58.2', # Or your database server's IP
+        'HOST': '34.55.58.2',  # Or your database server's IP
         'PORT': '5432',
     }
 }
@@ -106,16 +108,20 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation' +
+        '.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation' +
+        '.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation' +
+        '.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation' +
+        '.NumericPasswordValidator',
     },
 ]
 
